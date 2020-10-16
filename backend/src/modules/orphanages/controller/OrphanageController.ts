@@ -3,6 +3,7 @@ import { getRepository } from 'typeorm';
 
 import Orphanage from '../../../models/Orphaneges';
 import OrphanageServices from '../service/OrphanageServices';
+import OrphanageShowServices from '../service/OrphanageShowService';
 
 
 class OrphanageController {
@@ -11,6 +12,16 @@ class OrphanageController {
 
     const orphanages = await orphanageRepository.find();
     response.json(orphanages);
+  }
+  async show(request:Request, response:Response){
+    const { id }=request.params;
+
+    const orphanageRepository=getRepository(Orphanage);
+    const orphanageShowService = new OrphanageShowServices(orphanageRepository);
+
+    const findOneOrphanage = await orphanageShowService.execute(id);
+    
+    response.json(findOneOrphanage);
   }
   async create(request: Request, response: Response){
     const {
@@ -37,6 +48,7 @@ class OrphanageController {
   
     const orphanageRepository = getRepository(Orphanage);
     const orphanageService = new OrphanageServices(orphanageRepository);
+
     const orphanage = await orphanageService.execute({
       name,
       latitude,
