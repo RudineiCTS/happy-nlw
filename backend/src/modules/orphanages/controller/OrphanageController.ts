@@ -6,6 +6,12 @@ import OrphanageServices from '../service/OrphanageServices';
 
 
 class OrphanageController {
+  async index(request:Request, response:Response){
+    const orphanageRepository = getRepository(Orphanage);
+
+    const orphanages = await orphanageRepository.find();
+    response.json(orphanages);
+  }
   async create(request: Request, response: Response){
     const {
       name,
