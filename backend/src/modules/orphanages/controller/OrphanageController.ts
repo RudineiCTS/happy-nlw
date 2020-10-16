@@ -45,7 +45,12 @@ class OrphanageController {
     if(!instructions)return response.json({message: 'instructions is required'})
 
     if(!opening_hours)return response.json({message: 'opening hours is required'})
-  
+
+    const requestImages = request.files as Express.Multer.File[];
+    const images = requestImages.map(image =>{
+      return {path: image.filename}
+    })
+
     const orphanageRepository = getRepository(Orphanage);
     const orphanageService = new OrphanageServices(orphanageRepository);
 
@@ -56,7 +61,8 @@ class OrphanageController {
       about,
       instructions,
       opening_hours,
-      open_on_weekends
+      open_on_weekends,
+      images,
     });
 
     return response.status(201).json(orphanage);

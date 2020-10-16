@@ -1,4 +1,6 @@
 import { Repository } from 'typeorm';
+import Images from '../../../models/Images';
+
 import Orphanages from '../../../models/Orphaneges';
 
 
@@ -10,6 +12,7 @@ interface OrphanageDTO{
   instructions: string;
   opening_hours:string;
   open_on_weekends: boolean;
+  images: {path: string}[] ;
 }
 
 
