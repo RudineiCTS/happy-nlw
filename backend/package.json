@@ -5,10 +5,11 @@
   "license": "MIT",
   "scripts": {
     "dev:start": "ts-node-dev --transpile-only --ignore-watch node_modules src/infra/http/server.ts",
-    "typeorm":"ts-node-dev ./node_modules/typeorm/cli.js"
+    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
   },
   "dependencies": {
     "express": "^4.17.1",
+    "multer": "^1.4.2",
     "sqlite3": "^5.0.0",
     "typeorm": "^0.2.28"
   },
