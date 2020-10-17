@@ -1,6 +1,6 @@
 import {Entity, Column, PrimaryGeneratedColumn, OneToMany, JoinColumn} from 'typeorm';
 
-import Image from './Images';
+import Image from './Image';
 
 @Entity('orphanages')
 export default class Orphanage {
@@ -31,7 +31,9 @@ export default class Orphanage {
   // oneToMany(1, 2) 
   //1: uma função indicando o tipo de retorno
   //2: campo que retorna o relacionamento inverso, ou seja, o orfanato
-  @OneToMany(()=> Image, image => image.orphanage)
+  @OneToMany(()=> Image, image => image.orphanage, {
+    cascade: ['insert', 'update']
+  })
   @JoinColumn({name:'orphanage_id'})
   images: Image[];
 

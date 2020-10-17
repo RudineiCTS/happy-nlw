@@ -8,11 +8,13 @@ class OrphanageShowServices{
   this.repository = OrphanageRepository;
   }
   async execute(id: string){
-    const orphanage = await this.repository.findOne(id);
+    const orphanage = await this.repository.findOneOrFail(id, {
+      relations:['images']
+    });
 
-    if(!orphanage){
-     return ({message:'orphanage is not found!'});
-    }
+    // if(!orphanage){
+    //  return ({message:'orphanage is not found!'});
+    // }
     return orphanage;
   }
 }
